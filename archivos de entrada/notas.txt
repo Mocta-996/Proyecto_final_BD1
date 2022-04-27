@@ -1,0 +1,5 @@
+npm i express-session mysql express-mysql-session morgan  express-validator
+npm i express express-handlebars
+npm i nodemon -D
+npm i cors
+npm i mysql2
