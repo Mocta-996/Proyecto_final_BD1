@@ -56,6 +56,7 @@ VALUES ('Cherri','Astall','745-771-1229','79 Continental Lane','castall0@guardia
 /*
     STORE PROCEDURE Login admin
 */
+/*
 DROP PROCEDURE IF EXISTS login_admin;
 DELIMITER $$
 CREATE PROCEDURE login_admin(
@@ -66,7 +67,91 @@ BEGIN
     SELECT * FROM admin WHERE username = username_ AND contrasenia =pass_;
 END $$
 DELIMITER ;
+*/
 -- CALL login_admin ('admin','admin');
 /*INSERT INTO admin 
 (username,contrasenia)
 VALUES ('admin','admin');*/
+
+/*
+    STORE PROCEDURE Login maestro
+*/
+/*
+DROP PROCEDURE IF EXISTS login_teacher;
+DELIMITER $$
+CREATE PROCEDURE login_teacher(
+    IN registro_ VARCHAR(100),
+    IN pass_ VARCHAR(100)
+)
+BEGIN
+    SELECT id_maestro, nombre, apellido, foto FROM maestro WHERE dpi = registro_ AND contrasenia =pass_;
+END $$
+DELIMITER ;
+-- CALL login_teacher (4602555449219,'basesgg');
+*/
+
+/*
+    STORE PROCEDURE Login estudiante
+*/
+/*
+DROP PROCEDURE IF EXISTS login_student;
+DELIMITER $$
+CREATE PROCEDURE login_student(
+    IN registro_ VARCHAR(100),
+    IN pass_ VARCHAR(100)
+)
+BEGIN
+    SELECT id_estudiante, nombre, apellido, foto FROM estudiante WHERE carnet = registro_ AND contrasenia =pass_;
+END $$
+DELIMITER ;
+-- CALL login_student (121667366,'bases1');
+*/
+/*
+    STORE PROCEDURE agregar_carrera
+*/
+/*
+DROP PROCEDURE IF EXISTS agregar_carrera;
+DELIMITER $$
+CREATE PROCEDURE agregar_carrera(
+    IN nombre_ VARCHAR(100)
+)
+BEGIN
+    INSERT INTO carrera
+    (nombre)
+    VALUES (nombre_);
+END $$
+DELIMITER;
+*/
+-- CALL agregar_carrera ("carrera1");
+
+/*
+    STORE PROCEDURE agregar_curso
+*/
+/*
+DROP PROCEDURE IF EXISTS agregar_curso;
+DELIMITER //
+CREATE PROCEDURE agregar_curso( IN nombre_ VARCHAR(100) )
+BEGIN
+    INSERT INTO curso
+    (nombre)
+    VALUES (nombre_);
+END //
+DELIMITER;
+*/
+-- CALL agregar_curso ("curso1");
+
+/*
+    STORE PROCEDURE agregar_pensum
+*/
+/*
+DROP PROCEDURE IF EXISTS agregar_curso;
+DELIMITER //
+CREATE PROCEDURE agregar_curso( IN nombre_ VARCHAR(100) )
+BEGIN
+    INSERT INTO curso
+    (nombre)
+    VALUES (nombre_);
+END //
+DELIMITER;
+*/
+-- CALL agregar_curso ("curso1");

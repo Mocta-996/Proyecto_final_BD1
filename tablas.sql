@@ -55,9 +55,11 @@ CREATE TABLE estudiante (
     telefono  VARCHAR(50),
     direccion VARCHAR(50),
     correo  VARCHAR(100),
-    contrasenia varchar(20)
+    contrasenia varchar(20),
+    foto                MEDIUMBLOB NULL  
 );
 --id,Carnet,Nombre,Apellido,Telefono,Direccion,Correo,Contrasena
+-- ALTER TABLE estudiante ADD foto MEDIUMBLOB NULL  AFTER contrasenia;
 
 -- CREACION DE TABLA CARRERA
 CREATE TABLE carrera (
@@ -80,12 +82,12 @@ CREATE TABLE administrador (
 
 -- CREACION DE PENSUM
 CREATE TABLE pensum (
-    id_pensum  INT AUTO_INCREMENT PRIMARY KEY,
+    id_pensum  INT ,
     id_curso INT NOT NULL,
     id_carrera INT NOT NULL,
     FOREIGN KEY (id_curso) REFERENCES curso(id_curso),
     FOREIGN KEY (id_carrera) REFERENCES carrera(id_carrera), 
-    UNIQUE i_pensum (id_curso,id_carrera)
+    PRIMARY KEY  (id_pensum,id_curso,id_carrera)
 );
 
 -- CREACION DE SECCION
