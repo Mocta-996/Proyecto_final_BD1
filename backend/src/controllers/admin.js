@@ -8,7 +8,7 @@ const fs = require("fs");
 
 /**
  * @param  { url:"url" }  url data csv  student
- */
+*/
 async function load_data_student(req = request, res = response) {
     try {
         const data = [];
@@ -58,7 +58,7 @@ async function load_data_student(req = request, res = response) {
 
 /**
  * @param  { url:"url" }  url data csv teacher
- */
+*/
 async function load_data_teacher(req = request, res = response) {
     try {
         const data = [];
@@ -111,12 +111,12 @@ async function load_data_teacher(req = request, res = response) {
 
 /**
  * LOGIN
- * @param { "user":"user", "pass":"pass", "type":1 (admin) , 2(teacher) , 3(student)}
- */
+ * @param { "user":"user", "pass":"pass", "rol":1 (admin) , 2(teacher) , 3(student)}
+*/
 async function login(req = request, res = response) {
     try {
-        const { user, pass, type } = req.body;
-        if (type == 1) {
+        const { user, pass, rol } = req.body;
+        if (rol == 1) {
             let sql = " CALL login_admin (?,?)";
             const result = await DB.query(sql, [user, pass]);
             console.log(result[0]);
@@ -138,7 +138,7 @@ async function login(req = request, res = response) {
                     },
                 });
             }
-        } else if (type == 2) {
+        } else if (rol == 2) {
             let sql = " CALL login_teacher (?,?)";
             const result = await DB.query(sql, [user, pass]);
             console.log(result[0]);
@@ -199,7 +199,7 @@ async function login(req = request, res = response) {
 /*
  * LOGOUT
  * @param
- */
+*/
 async function logout(req = request, res = response) {
     try {
         req.session.destroy();
@@ -216,9 +216,55 @@ async function logout(req = request, res = response) {
     }
 }
 
+/**
+ * AGREGAR CARRERA
+ * @param { "carrera":"nombre_carrera"}
+*/
+async function agregar_carrera(req = request, res = response) {
+     try {
+         const { carrera } = req.body;
+         let sql = " CALL agregar_carrera (?)";
+         await DB.query(sql, [carrera]);
+         res.status(200).json({
+             state: true,
+             msg: "Carrera agregado correctamente"
+         });
+     } catch (error) {
+         console.log(error);
+         res.status(500).json({
+             state: false,
+             msg: "error al agregar carrera "
+         });
+     }
+}
+
+/**
+ * OBTENER LISTADO DE CARRERAS
+ * @param 
+*/
+async function obtener_carreras(req = request, res = response) {
+    try {
+        const { carrera } = req.body;
+        let sql = " CALL agregar_carrera (?)";
+        await DB.query(sql, [carrera]);
+        res.status(200).json({
+            state: true,
+            msg: "Carrera agregado correctamente"
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            state: false,
+            msg: "error al agregar carrera "
+        });
+    }
+}
+
+
 module.exports = {
     load_data_student,
     load_data_teacher,
     login,
     logout,
+    agregar_carrera
 };

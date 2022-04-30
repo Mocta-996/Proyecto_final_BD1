@@ -36,4 +36,7 @@ router.get("/admin/loadstudent", admin.load_data_student);
 router.get("/admin/loadsteacher", admin.load_data_teacher);
 router.post("/admin/login", admin.login);
 router.get("/admin/logout", admin.logout);
+router.post("/admin/agregarCarrera", admin.agregar_carrera);
+
+
 module.exports = router;
