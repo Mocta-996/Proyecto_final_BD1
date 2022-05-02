@@ -1,76 +1,52 @@
-import React,{useState} from 'react';
-import {Container,FormControl, Navbar,Nav,NavDropdown} from "react-bootstrap";
+import React, { useState } from "react";
+import { Carousel } from "react-bootstrap";
+import background from "./img.jpg";
+import img2 from "./img2.jpg";
 
+var sectionStyle = {
+    width: "100%",
+    height: "600px",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundImage: `url(${background})`,
+};
 
 function Home() {
+    const [index, setIndex] = useState(0);
+
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
     return (
-           <div>hola </div>
+        <>
+            <div style={sectionStyle}>
+                <Carousel activeIndex={index} onSelect={handleSelect}>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src={img2}
+                            alt="First slide"
+                        />
+                        <Carousel.Caption>
+                            <h2>Bienvenido</h2>
+                            <p>
+                                © 2022 Sistemas de Base de Datos
+                            </p>
+                        </Carousel.Caption>
+                    </Carousel.Item>                  
+                </Carousel>
+            </div>
+           
+        </>
     );
 }
 
 export default Home;
-
-/**
- * const Home = () => {
-    const [checked, setChecked] = useState(false);
-    const [radioValue, setRadioValue] = useState('3')
-    const radios = [
-        { name: 'Administrador ', value: '1' },
-        { name: 'Maestro', value: '2' },
-        { name: 'Estudiante', value: '3' },
-      ];
-    return (
-        <>
-            <Container>
-                <h1 className="shadow-sm text-success mt-5 p-3 text-center rounded">
-                    Iniciar Sesión{" "}
-                </h1>
-                <Row className="mt-5">
-                    <Col lg={5} md={6}  sm={12}  className="p-5 m-auto shadow-sm rounded-lg"  >
-                        <Form>
-                            <ButtonGroup className="mb-2">
-                            {radios.map((radio, idx) => (
-          <ToggleButton
-            key={idx}
-            id={`radio-${idx}`}
-            type="radio"
-            variant= 'outline-success'
-            name="radio"
-            value={radio.value}
-            checked={radioValue === radio.value}
-            onChange={(e) => setRadioValue(e.currentTarget.value)}
-          >
-            {radio.name}
-          </ToggleButton>
-        ))}
-                            </ButtonGroup>
-
-                            <Form.Group controlId="formLogin">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control
-                                    type="email"
-                                    placeholder="Enter email"
-                                />
-                            </Form.Group>
-
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    placeholder="Password"
-                                />
-                            </Form.Group>
-
-                            <Button variant="success btn-block" type="submit">
-                                Login
-                            </Button>
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    );
-};
-
-export default Home;
- */
+/*
+ <footer class="fixed-bottom bg-dark">
+                <div class="footer-copyright text-center py-3 text-white">
+                    © 2022 Sistemas de Base de Datos
+                </div>
+            </footer>
+*/

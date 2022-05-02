@@ -1,6 +1,8 @@
-import React,{useState, useEffect} from 'react';
-import {Button, Col, Container, Form, Row,ButtonGroup,ToggleButton} from "react-bootstrap";
+import React,{useState} from 'react';
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {useParams, Link,useNavigate} from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 
 async function loginUser(credentials) {
@@ -13,7 +15,7 @@ async function loginUser(credentials) {
       body: JSON.stringify(credentials)
     })
       .then(data => data.json())
-   }
+}
 
 function Login(props) {
     const {rol} = useParams();
@@ -28,9 +30,22 @@ function Login(props) {
           pass,
           rol
         });
-        console.log(token);
-        navigate('/');
-        //setToken(token);
+        const {state} = token;
+        
+        if(state && rol ==1){
+            const {DataUser} = token;
+            props.logg(true);
+            //console.log(DataUser);
+            navigate("/admin",{ state: {userData:DataUser} });
+        }else{
+             
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Error de Autenticacion, Credenciales no coinciden!',
+            })
+        }
+        
       }
     return (
         <>
